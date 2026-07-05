@@ -1,46 +1,64 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-int main()
-{
+
+int main() {
+
     int n;
-    cout<<"Enter the number of elements: ";
-    cin>>n;
-    int A[n], B[n];
-    for(int x=0; x<n; x++)
-    {
-        cout<<"Enter element "<<x+1<<": ";
-        cin>>A[x];
+
+    cout << "Enter size of array: ";
+    cin >> n;
+
+    int arr[n];
+
+    cout << "Enter array elements: ";
+
+    for(int i = 0; i < n; i++) {
+        cin >> arr[i];
     }
-    int max=A[0];
-    for(int x=1; x<n; x++)
-    {
-        if(A[x]>max)
-        {
-            max=A[x];
-        }
-    }
-    for(int p=1; max/p>0; p=p*10)
-    {
-        int count[10]={0};
-        for(int x=0; x<n; x++)
-        {
-            count[(A[x]/p)%10]++;
-        }
-        for(int x=1; x<10; x++)
-        {
-            count[x]=count[x]+count[x-1];
-        }
-        for(int x=n-1; x>=0; x--)
-        {
-            B[--count[(A[x]/p)%10]]=A[x];
-        }
-        for(int x=0; x<n; x++)
-        {
-            A[x]=B[x];
+
+    // Find maximum element
+    int max = arr[0];
+
+    for(int i = 1; i < n; i++) {
+        if(arr[i] > max) {
+            max = arr[i];
         }
     }
-    for(int x=0; x<n; x++)
-    {
-        cout<<A[x]<<" ";
+
+    // Radix Sort
+    for(int exp = 1; max / exp > 0; exp *= 10) {
+
+        int output[n];
+        int count[10] = {0};
+
+        // Store count
+        for(int i = 0; i < n; i++) {
+            count[(arr[i] / exp) % 10]++;
+        }
+
+        // Update count array
+        for(int i = 1; i < 10; i++) {
+            count[i] += count[i - 1];
+        }
+
+        // Build output array
+        for(int i = n - 1; i >= 0; i--) {
+
+            output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+            count[(arr[i] / exp) % 10]--;
+        }
+
+        // Copy output to original array
+        for(int i = 0; i < n; i++) {
+            arr[i] = output[i];
+        }
     }
+
+    cout << "Sorted array: ";
+
+    for(int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+
+    return 0;
 }

@@ -1,66 +1,47 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
-// Counting Sort Algorithm
-vector<int> countingSort(const vector<int> &A, int k)
-{
-  int n = A.size();
+int main() {
 
-  // [Initialize counts.]
-  vector<int> C(k + 1, 0);
-  vector<int> B(n);
+    int n;
 
-  // [Count occurrences.]
-  for (int j = 0; j < n; j++)
-  {
-    C[A[j]] = C[A[j]] + 1;
-  }
+    cout << "Enter size of array: ";
+    cin >> n;
 
-  // [Compute cumulative counts.]
-  for (int i = 1; i <= k; i++)
-  {
-    C[i] = C[i] + C[i - 1];
-  }
+    int arr[n];
 
-  // [Build output array.]
-  for (int j = n - 1; j >= 0; j--)
-  {
-    B[C[A[j]] - 1] = A[j];   // place element
-    C[A[j]] = C[A[j]] - 1;  // update position
-  }
+    cout << "Enter array elements: ";
+    for(int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
 
-  // [Return.]
-  return B;
-}
+    // Find maximum element
+    int max = arr[0];
 
-// -------- Driver Code --------
-int main()
-{
-  int n, k;
+    for(int i = 1; i < n; i++) {
+        if(arr[i] > max) {
+            max = arr[i];
+        }
+    }
 
-  cout << "Enter number of elements: ";
-  cin >> n;
+    // Count array
+    int count[max + 1] = {0};
 
-  vector<int> A(n);
+    // Store frequency
+    for(int i = 0; i < n; i++) {
+        count[arr[i]]++;
+    }
 
-  cout << "Enter elements (range 0 to k):\n";
-  for (int i = 0; i < n; i++)
-  {
-    cin >> A[i];
-  }
+    // Print sorted array
+    cout << "Sorted array: ";
 
-  cout << "Enter maximum value k: ";
-  cin >> k;
+    for(int i = 0; i <= max; i++) {
 
-  vector<int> B = countingSort(A, k);
+        while(count[i] > 0) {
+            cout << i << " ";
+            count[i]--;
+        }
+    }
 
-  cout << "\nSorted array:\n";
-  for (int x : B)
-  {
-    cout << x << " ";
-  }
-  cout << endl;
-
-  return 0;
+    return 0;
 }
