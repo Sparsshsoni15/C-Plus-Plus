@@ -2,7 +2,6 @@
 using namespace std;
 int main()
 {
-
     // To print numbers from 1 to n using for loop
 
     int n;

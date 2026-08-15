@@ -15,6 +15,7 @@ int main(){
         power=power*2;
         n=n/10;
     }
+    
     cout<<"Decimal equivalent: "<<ans<<endl;
     return 0;
 }
