@@ -1,20 +1,29 @@
 #include <iostream>
 using namespace std;
-int fib(int);
-int main(){
-    int n,i,r;
-    cout<<"Enter the number of terms in the Fibonacci series: "<<endl;
-    cin>>n;
-    for(i=0;i<n;i++){
-        r=fib(i);
-        cout<<r<<" ";
-    }
+
+int fibonacci(int n)
+{
+    
+    if (n == 0 || n == 1)
+        return n;
+
+    
+    return fibonacci(n - 1) + fibonacci(n - 2);
 }
-int fib(int n){
-    if(n==0)
+
+int main()
+{
+    int n;
+
+    cout << "Enter number of terms: ";
+    cin >> n;
+
+    cout << "Fibonacci Series: ";
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << fibonacci(i) << " ";
+    }
+
     return 0;
-    if(n==1)
-    return 1;
-    else
-    return(fib(n-1)+fib(n-2));
 }

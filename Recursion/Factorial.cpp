@@ -1,17 +1,22 @@
 #include <iostream>
 using namespace std;
-int fact(int);
-int main(){
-    int n,x;
-    cout<<"Enter a number to find its factorial: "<<endl;
-    cin>>n;
-    x=fact(n);
-    cout<<"The factorial of "<<n<<" is: "<<x<<endl;
 
+int factorial(int n)
+{
+    if (n == 0 || n == 1)
+        return 1; 
+
+    return n * factorial(n - 1);
 }
-int fact(int n){
-    if(n==1)
-    return 1;
-    else
-    return(n*fact(n-1));
+
+int main()
+{
+    int n;
+
+    cout << "Enter a number: ";
+    cin >> n;
+
+    cout << "Factorial = " << factorial(n);
+
+    return 0;
 }
